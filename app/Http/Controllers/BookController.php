@@ -13,7 +13,7 @@ class BookController extends Controller
      */
     public function index()
     {
-      dd(BookResource::collection(Book::with('ratings')->paginate(25)));
+      return BookResource::collection(Book::with('ratings')->paginate(10));
     }
 
 
@@ -23,10 +23,11 @@ class BookController extends Controller
     public function store(Request $request)
     {
       $book = Book::create([
-        'user_id' => $request->user()->id,
+        'user_id' => $request->user_id,
         'title' => $request->title,
         'description' => $request->description,
       ]);
+
 
       return new BookResource($book);
     }

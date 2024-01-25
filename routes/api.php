@@ -21,4 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('books', 'App\Http\Controllers\BookController');
-Route::post('books/{book}/ratings', 'RatingController@store');
+Route::post('books/{book}/ratings', 'App\Http\Controllers\RatingController@store');
