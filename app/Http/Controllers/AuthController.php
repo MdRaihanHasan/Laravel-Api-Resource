@@ -9,33 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
 
-    public function multiUpload(Request $request) {
-
-
-        $request->validate([
-            'files.*' => 'required'
-        ]);
-
-        $files = $request->file('files');
-
-        $user = Auth::user();
-        $uploadedFiles = [];
-
-        foreach ($files as $file) {
-            $fileName = $file->getClientOriginalName();
-            $file->move(base_path() . "/uploads/", $fileName);
-            $uploadedFiles[] = $fileName;
-        }
-        
-        return response()->json([
-            'status' => 'true',
-            'files' => $uploadedFiles,
-            'user' => $user
-        ]);
-
-    }
-
-
     public function register(Request $request) {
 
         $validatedData = $request->validate([
@@ -93,6 +66,30 @@ class AuthController extends Controller
             'file' => $fileName,
             'user' => $user
         ]);
+    }
+
+    public function multiUpload(Request $request) {
+        $request->validate([
+            'files.*' => 'required'
+        ]);
+
+        $files = $request->file('files');
+
+        $user = Auth::user();
+        $uploadedFiles = [];
+
+        foreach ($files as $file) {
+            $fileName = $file->getClientOriginalName();
+            $file->move(base_path() . "/uploads/", $fileName);
+            $uploadedFiles[] = $fileName;
+        }
+
+        return response()->json([
+            'status' => 'true',
+            'files' => $uploadedFiles,
+            'user' => $user
+        ]);
+
     }
 
 
