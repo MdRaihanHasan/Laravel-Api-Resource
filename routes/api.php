@@ -43,9 +43,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 });
 
-// Route::get('dabba', function() {
-//     return 'dabba hai dabba uncle ka tv dabba';
-// })->name('login');
+Route::get('/abd/dabba', function() {
+    return 'dabba hai dabba uncle ka tv dabba';
+})->name('login');
 
 
 Route::post('register', 'App\Http\Controllers\AuthController@register');

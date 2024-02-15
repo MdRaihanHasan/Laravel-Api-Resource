@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\UserDTO;
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookResource;
 
@@ -14,6 +16,19 @@ class BookController extends Controller
     public function index()
     {
       return BookResource::collection(Book::with('ratings')->paginate(10));
+    }
+
+    /**
+     * Display a user data with DTO.
+     */
+    public function userData() {
+        $user = User::find(1);
+
+        // Create a DTO object and populate it with user data
+        $userDataDTO = new UserDTO($user);
+
+        dd($userDataDTO->userEmail());
+
     }
 
 
